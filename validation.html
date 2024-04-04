@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    form {
+      max-width: 400px;
+      margin: 20px auto;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .error-message {
+      color: red;
+      margin-top: -10px;
+      margin-bottom: 10px;
+    }
+  </style>
+  <script>
+    function validateForm() {
+      var firstName = document.getElementById('firstName').value;
+      var lastName = document.getElementById('lastName').value;
+      var phoneNumber = document.getElementById('phoneNumber').value;
+      var email = document.getElementById('email').value;
+  
+      var errorMessage = document.getElementById('errorMessage');
+      errorMessage.innerHTML = '';
+  
+      if (!firstName || !lastName || !phoneNumber || !email) {
+        errorMessage.innerHTML = 'All fields are required';
+        return;
+      }
+
+      if(firstName.length < 5){
+        errorMessage.innerHTML = 'The number of characters in first name should be more than 5';
+        return;
+      }
+
+      if(lastName.length < 5){
+        errorMessage.innerHTML = 'The number of characters in last name should be more than 5';
+        return;
+      }
+
+      var phoneregex = /^[0-9]{10}$/;
+      if(!phoneregex.test(phoneNumber)) {
+        errorMessage.innerHTML = 'Invalid phone number';
+        return;
+      }
+  
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        errorMessage.innerHTML = 'Invalid email address';
+        return;  
+      }
+      
+
+      alert('Form submitted successfully!');
+    }
+  </script>
+  <title>User Form</title>
+</head>
+<body>
+
+<form id="userForm">
+  <label for="firstName">First Name:</label>
+  <input type="text" id="firstName" required>
+
+  <label for="lastName">Last Name:</label>
+  <input type="text" id="lastName" required>
+
+  <label for="phoneNumber">Phone Number:</label>
+  <input type="tel" id="phoneNumber" required>
+
+  <label for="email">Email Address:</label>
+  <input type="email" id="email" required>
+
+  <div class="error-message" id="errorMessage"></div>
+
+  <button type="button" onclick="validateForm()">Submit</button>
+</form>
+
+</body>
+</html>
